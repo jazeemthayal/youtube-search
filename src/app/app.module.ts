@@ -17,6 +17,7 @@ import { EffectsModule } from "@ngrx/effects";
 import { VideosEffects } from "./store/videos.effects";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { VideosComponent } from "./videos/videos.component";
+import { MatPaginatorModule } from "@angular/material/paginator";
 
 @NgModule({
   declarations: [AppComponent, VideosComponent],
@@ -34,6 +35,7 @@ import { VideosComponent } from "./videos/videos.component";
     MatIconModule,
     MatInputModule,
     MatProgressSpinnerModule,
+    MatPaginatorModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

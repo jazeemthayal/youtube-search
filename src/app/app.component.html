@@ -26,4 +26,13 @@
     <mat-spinner *ngIf="isLoading"></mat-spinner>
   </div>
   <app-videos *ngIf="!isLoading"></app-videos>
+  <mat-paginator
+    #p
+    *ngIf="videoData.pageInfo.totalResults"
+    [length]="videoData.pageInfo.totalResults"
+    [pageSize]="videoData.pageInfo.resultsPerPage"
+    (page)="pageChange($event)"
+    style="margin-top: 10px"
+  >
+  </mat-paginator>
 </div>

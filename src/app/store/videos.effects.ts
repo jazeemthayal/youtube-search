@@ -4,7 +4,7 @@ import { Actions, Effect, ofType } from "@ngrx/effects";
 import { of } from "rxjs";
 import { catchError, switchMap, map } from "rxjs/operators";
 import { environment } from "src/environments/environment";
-import { Video } from "../models/video.model";
+import { VideoData } from "../models/video-data.model";
 import * as VideosActions from "./videos.actions";
 
 const handleError = (errorRes) => {
@@ -21,12 +21,11 @@ export class VideosEffects {
   fetchVideos = this.actions$.pipe(
     ofType(VideosActions.VIDEO_FETCH_START),
     switchMap((actionData: VideosActions.VideoFetchStart) => {
-      return this.http.get<Video[]>(
-        `https://www.googleapis.com/youtube/v3/search?q=${actionData.payload.query}&key=${environment.apiKey2}&part=snippet&type=video&maxResults=10`
+      return this.http.get<VideoData>(
+        `https://www.googleapis.com/youtube/v3/search?q=${actionData.payload.query}&key=${environment.apiKey2}&part=snippet&type=video&maxResults=9&pageToken=${actionData.payload.pageToken}`
       );
     }),
-    map((res: any) => res.items),
-    map((videos) => new VideosActions.SetVideos(videos)),
+    map((res: VideoData) => new VideosActions.FetchResults(res)),
     catchError((errorRes) => handleError(errorRes))
   );
   constructor(private actions$: Actions, private http: HttpClient) {}

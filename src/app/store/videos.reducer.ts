@@ -1,16 +1,24 @@
-import { Video } from "../models/video.model";
+import { VideoData } from "../models/video-data.model";
 import * as VideosActions from "./videos.actions";
 
 export interface State {
-  videos: Video[];
   videoFetchError: string;
   loading: boolean;
+  data: VideoData;
 }
 
 const initialState: State = {
-  videos: [],
   videoFetchError: null,
   loading: false,
+  data: {
+    items: [],
+    pageInfo: {
+      totalResults: null,
+      resultsPerPage: null,
+    },
+    nextPageToken: null,
+    prevPageToken: null,
+  },
 };
 
 export function videosReducer(
@@ -29,20 +37,18 @@ export function videosReducer(
         ...state,
         videoFetchError: null,
         loading: false,
-        searchResults: null,
       };
     case VideosActions.VIDEO_FETCH_FAIL:
       return {
         ...state,
-        videos: [],
+        data: null,
         videoFetchError: action.payload,
         loading: false,
-        searchResults: null,
       };
-    case VideosActions.SET_VIDEOS:
+    case VideosActions.FETCH_RESULTS:
       return {
         ...state,
-        videos: [...action.payload],
+        data: { ...action.payload },
         videoFetchError: null,
         loading: false,
       };
