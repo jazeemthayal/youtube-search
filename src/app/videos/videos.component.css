@@ -1,0 +1,24 @@
+.videolist-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 30px 10px;
+  justify-items: center;
+}
+
+@media (max-width: 1440px) {
+  .videolist-container {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media (max-width: 1280px) {
+  .videolist-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .videolist-container {
+    grid-template-columns: 1fr;
+  }
+}

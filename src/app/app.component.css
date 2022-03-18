@@ -1,0 +1,19 @@
+.container {
+  min-height: 100vh;
+  padding: 50px;
+  background: #f1f3f4;
+}
+.searchbar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 80px;
+}
+.example-card {
+  width: 350px;
+}
+.example-form {
+  width: 50vw;
+}
+.example-full-width {
+  width: 100%;
+}
