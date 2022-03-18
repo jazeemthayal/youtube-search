@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Subscription } from "rxjs";
 import { Video } from "../models/video.model";
@@ -10,7 +10,7 @@ import { map } from "rxjs/operators";
   templateUrl: "./videos.component.html",
   styleUrls: ["./videos.component.css"],
 })
-export class VideosComponent implements OnInit {
+export class VideosComponent implements OnInit, OnDestroy {
   videos: Video[];
   subscription: Subscription;
 
@@ -27,5 +27,9 @@ export class VideosComponent implements OnInit {
       .subscribe((videos: Video[]) => {
         this.videos = videos;
       });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

@@ -13,36 +13,18 @@ import * as VideosActions from "./store/videos.actions";
   styleUrls: ["./app.component.css"],
 })
 export class AppComponent implements OnInit, OnDestroy {
-  // videos: Observable<{ videos: any[] }>;
-  // videos: Video[]
   search = "";
   isLoading = false;
-  error: string = "unknown error occured";
+  error: string;
   subscription: Subscription;
 
-  constructor(
-    private apiService: ApiService,
-    private store: Store<fromApp.AppState>
-  ) {}
+  constructor(private store: Store<fromApp.AppState>) {}
 
   ngOnInit(): void {
-    this.subscription = this.store
-      .select("videos")
-      // .pipe(
-      //   map((videosState) => {
-      //     this.isLoading = videosState.loading;
-      //     this.error = videosState.videoFetchError;
-      //     return videosState.videos;
-
-      //   })
-      // )
-      // .subscribe((videos: Video[]) => {
-      //   this.videos = videos;
-      // });
-      .subscribe((videosState) => {
-        this.isLoading = videosState.loading;
-        this.error = videosState.videoFetchError;
-      });
+    this.subscription = this.store.select("videos").subscribe((videosState) => {
+      this.isLoading = videosState.loading;
+      this.error = videosState.videoFetchError;
+    });
   }
 
   onSubmit() {
